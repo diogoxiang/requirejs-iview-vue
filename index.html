@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Require Vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <style>
+        .component-fade-enter-active,
+        .component-fade-leave-active {
+            transition: opacity .3s ease;
+        }
+
+        .component-fade-enter,
+        .component-fade-leave-to{
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container is-fluid">
+        <div class="tabs">
+            <ul>
+                <li>Started at: {{started}}</li>
+                <router-link tag="li" active-class="is-active" to="/home"><a>Home </a></router-link>
+                <router-link tag="li" active-class="is-active" to="/inner"><a>内嵌html</a></router-link>
+                <router-link tag="li" active-class="is-active" to="/html"><a>HTML 单文引入</a></router-link>
+                <router-link tag="li" active-class="is-active" to="/vue"><a>Vue 单文件引入 </a></router-link>
+                <router-link tag="li" active-class="is-active" to="/async"><a>Async 异步引入js </a></router-link>
+                <router-link tag="li" active-class="is-active" to="/iv"><a>Async 异步引入iview </a></router-link>
+            </ul>
+        </div>
+        <div class="column is-half">
+            <transition name="component-fade" mode="out-in">
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
+            </transition>
+        </div>
+
+        <i-button @click="show">Click me!</i-button>
+        <Modal v-model="visible" title="Welcome">Welcome to iView</Modal>
+
+        <Circle :percent="80">
+            <span class="demo-Circle-inner" style="font-size:24px">80%</span>
+        </Circle>
+    </div>
+    <script data-main="app" src="lib/require.js"></script>
+</body>
+
+</html>
